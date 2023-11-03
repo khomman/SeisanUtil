@@ -1,0 +1,49 @@
+ 2019  8 1 1544 38.9 LQ 40.819 -78.259 0.10F IST 21 .21 2.3LIST 0.0CIST        1
+ GAP=179                 0.910   0.910 31.6                                    E
+ 2019-08-01-1544-29S.PE____258                                                 6
+ BINDERID: 25698                                                               3
+ VERSIONID: 2                                                                  3
+ CHANNELID: PSAL.HHZ.PE.--                                                     3
+ CHANNELID: PSAL.HHN.PE.--                                                     3
+ CHANNELID: PABK.HHZ.PE.--                                                     3
+ CHANNELID: IUPA.HHN.PE.--                                                     3
+ CHANNELID: PASH.HHZ.PE.--                                                     3
+ CHANNELID: PACC.HHE.PE.--                                                     3
+ CHANNELID: PAKS.HHN.PE.--                                                     3
+ CHANNELID: M57A.HH2.N4.00                                                     3
+ CHANNELID: PALR.HHE.PE.--                                                     3
+ CHANNELID: N58A.HHZ.N4.00                                                     3
+ CHANNELID: N58A.HH2.N4.00                                                     3
+ CHANNELID: PACH.HHE.PE.--                                                     3
+ CHANNELID: PAOC.HHE.PE.--                                                     3
+ CHANNELID: UPAO.HHN.PE.--                                                     3
+ CHANNELID: PSSK.HHE.PE.--                                                     3
+ CHANNELID: PAMP.HHE.PE.--                                                     3
+ CHANNELID: PSBV.HHE.PE.--                                                     3
+ CHANNELID: FMMC.HHE.LD.--                                                     3
+ CHANNELID: SDMD.HHZ.LD.--                                                     3
+ CHANNELID: O54A.HH2.N4.00                                                     3
+ CHANNELID: Q56A.HH2.N4.00                                                     3
+ CHANNELID: PARS.HHN.PE.--                                                     3
+ CHANNELID: N53A.HH2.N4.00                                                     3
+ ACTION:HIN 19-08-01 12:13 OP:kah  STATUS:               ID:20190801154440     I
+ STAT SP IPHASW D HRMM SECON CODA AMPLIT PERI AZIMU VELO AIN AR TRES W  DIS CAZ7
+ PSAL HZ IP   0   1544 44.41                              90   -.0501033.20 204 
+ SSPA B1 IS   0   1544 49.77                              90   0.2001037.40 122 
+ SSPA BZ IP   0   1544 45.24                              90   0.0901037.40 122 
+ PABE HZ EP   0   1544 48.65                              90   0.3101056.50  64 
+ PABE HN IS   0   1544 55.32                              90   0.2001056.50  64 
+ PAKC HN IS   0   1544 58.77                              90    2.501067.60  23 
+ PAKC HZ EP   0   1544 49.90                              90   -.2901067.60  23 
+ M57A H1 IS   0   1545 10.86                              90   -2.9010111.1  58 
+ PAKS HN  IAML    1545 16.00        87.0 0.90                                   
+ PASH HN  IAML    1545 12.38        48.5 0.58                                   
+ N58A H1  IAML    1545 23.10        22.9 1.47                                   
+ PALB HN  IAML    1545 13.63        23.4 1.26                                   
+ PSDB HE  IAML    1544 58.34       340.1 0.73                                   
+ SSPA B2  IAML    1544 53.28        69.5 1.10                                   
+ UPAO HN  IAML    1545 25.90       192.1 0.51                                   
+ PACC HE  IAML    1545  9.26        71.4 0.57                                   
+ M57A H1  IAML    1545 16.52        51.8 0.77                                   
+ PABE HN  IAML    1545  1.16       189.9 0.78                                   
+ PSAL HE  IAML    1544 51.84       391.0 0.89                                   

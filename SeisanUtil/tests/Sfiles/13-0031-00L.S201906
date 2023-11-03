@@ -1,0 +1,134 @@
+ 2019  613  030 57.3 LQ 40.421 -77.508 26.2  IST 31 .42 3.8LIST 0.0CIST        1
+ GAP= 89                 0.720   0.7200.900                                    E
+ 2019-06-13-0030-50S.PE____258                                                 6
+ BINDERID: 133412                                                              3
+ VERSIONID: 2                                                                  3
+ CHANNELID: PALB.HHZ.PE.--                                                     3
+ CHANNELID: PALB.HHN.PE.--                                                     3
+ CHANNELID: SSPA.HH2.IU.10                                                     3
+ CHANNELID: PACW.HHZ.PE.--                                                     3
+ CHANNELID: PACW.HHE.PE.--                                                     3
+ CHANNELID: PAGS.HHZ.PE.--                                                     3
+ CHANNELID: PAGS.HHE.PE.--                                                     3
+ CHANNELID: PABE.HHZ.PE.--                                                     3
+ CHANNELID: PABE.HHN.PE.--                                                     3
+ CHANNELID: PSAL.HHZ.PE.--                                                     3
+ CHANNELID: PSAL.HHN.PE.--                                                     3
+ CHANNELID: N58A.HHZ.N4.00                                                     3
+ CHANNELID: N58A.HH2.N4.00                                                     3
+ CHANNELID: PABK.HHZ.PE.--                                                     3
+ CHANNELID: PABK.HHE.PE.--                                                     3
+ CHANNELID: PASH.HHZ.PE.--                                                     3
+ CHANNELID: PASH.HHE.PE.--                                                     3
+ CHANNELID: PSSK.HHZ.PE.--                                                     3
+ CHANNELID: PSBK.HHZ.PE.--                                                     3
+ CHANNELID: PSBK.HHE.PE.--                                                     3
+ CHANNELID: PSDB.HHZ.PE.--                                                     3
+ CHANNELID: PSDB.HHN.PE.--                                                     3
+ CHANNELID: IUPA.HHZ.PE.--                                                     3
+ CHANNELID: IUPA.HHE.PE.--                                                     3
+ CHANNELID: PALR.HHZ.PE.--                                                     3
+ CHANNELID: PALR.HHE.PE.--                                                     3
+ CHANNELID: PSWB.HHZ.PE.--                                                     3
+ CHANNELID: PSWB.HHN.PE.--                                                     3
+ CHANNELID: PAKS.HHZ.PE.--                                                     3
+ CHANNELID: PAKS.HHN.PE.--                                                     3
+ CHANNELID: PAHR.HHZ.PE.--                                                     3
+ CHANNELID: PAHR.HHN.PE.--                                                     3
+ CHANNELID: PAMP.HHZ.PE.--                                                     3
+ CHANNELID: PAMP.HHN.PE.--                                                     3
+ CHANNELID: GEDE.HHZ.LD.--                                                     3
+ CHANNELID: LUPA.HHZ.LD.--                                                     3
+ CHANNELID: PSUB.HHZ.PE.--                                                     3
+ CHANNELID: PSUB.HHN.PE.--                                                     3
+ CHANNELID: PSUF.HHZ.PE.--                                                     3
+ CHANNELID: PSUF.HHE.PE.--                                                     3
+ CHANNELID: L56A.HHZ.N4.00                                                     3
+ CHANNELID: PACH.HHZ.PE.--                                                     3
+ CHANNELID: UPAO.HHZ.PE.--                                                     3
+ CHANNELID: PAOC.HHZ.PE.--                                                     3
+ CHANNELID: PAMR.HHZ.PE.--                                                     3
+ CHANNELID: PAPL.HHZ.PE.--                                                     3
+ CHANNELID: PANJ.HHZ.LD.--                                                     3
+ CHANNELID: PSBV.HHZ.PE.--                                                     3
+ CHANNELID: ERPA.BHZ.US.00                                                     3
+ ACTION:HIN 19-06-12 23:24 OP:kah  STATUS:               ID:20190613003057     I
+ STAT SP IPHASW D HRMM SECON CODA AMPLIT PERI AZIMU VELO AIN AR TRES W  DIS CAZ7
+ PALB HZ IP   0 C  031  4.52                             128   0.9401029.20  81 
+ PALB HE IS   0    031  9.02                             128    8.001029.20  81 
+ SSPA HZ IP   0 C  031  5.36                             118   0.4101040.10 307 
+ PACW HZ IP   0 C  031  7.79                             107   0.1701059.10 218 
+ PABE HZ IP   0 C  031  8.97                             103   -.1301069.20 350 
+ PAGS HZ IP   0 D  031  9.11                             103   -.1401070.30 107 
+ PSAL HZ IP   0 D  031 10.58                             101   0.1801078.00 281 
+ PSAL HE IS   0    031 20.30                             101    2.101078.00 281 
+ N58A HZ IP   0 D  031 10.69                             100   -.2401081.60  54 
+ N58A H2 IS   0    031 21.37                             100    3.601081.60  54 
+ PABK HZ IP   0 D  031 12.55                              98   -.0801093.00 260 
+ PABK HN IS   0    031 23.62                              98   -3.501093.00 260 
+ PASH HZ IP   0 D  031 14.18                              96   -.33010105.5 246 
+ PASH HN IS   0    031 26.64                              96   -6.0010105.5 246 
+ M57A HZ IP   0 D  031 14.26                              96   -.43010106.7  17 
+ M57A H2 ES   0    031 27.00                              96   -5.5010106.7  17 
+ MVL  HZ IP   0 D  031 14.50                              96   -.58010109.2 114 
+ MVL  HN IS   0    031 27.77                              96   -4.6010109.2 114 
+ PAKC HZ EP   0    031 15.11                              95   -.35010111.8 342 
+ PAKC HN IS   0    031 28.79                              95   -1.0010111.8 342 
+ P57A HZ EP   0 C  031 15.27                              95   -.32010112.6 203 
+ PSSK HZ IP   0 D  031 15.44                              54   -.63010116.5  77 
+ PSBK HZ EP   0    031 17.29                              54   -.51010130.4  92 
+ PSBK HE IS   0    031 33.30                              54    3.4010130.4  92 
+ PSDB HZ EP   0 D  031 18.33                              54   0.44010131.1 308 
+ PALR HZ IP   0 C  031 19.75                              54   -.02010146.4 352 
+ PSWB HZ IP   0 D  031 21.71                              54   0.30010159.7  51 
+ PSWB HE IS   0    031 38.79                              54   -4.5010159.7  51 
+ PAHR HZ EP   0    031 22.03                              54   -.17010166.1  65 
+ PAMP HZ EP   0    031 22.82                              54   0.23010169.2  24 
+ WUPA HZ EP   0    031 23.01                              54   0.22010170.9 107 
+ GEDE HZ IP   0 C  031 23.90                              54   0.80010173.4 112 
+ LUPA HZ EP   0    031 24.12                              54   -.07010182.2  83 
+ L56A HZ EP   0 D  031 25.22                              54   -.01010190.6 359 
+ PSUF HZ EP   0    031 25.72                              54   0.48010190.7 255 
+ PACH HZ IP   0 C  031 26.75                              54   -.11010203.8 318 
+ PAOC HZ IP   0 C  031 28.87                              54   0.05010219.7 305 
+ PAOC HN IS   0    031 52.38                              54    2.4010219.7 305 
+ PSBV HZ IP   0 D  031 31.59                              54   0.50010238.1 278 
+ O54A HZ EP   0 D  031 32.19                              54   0.19010245.5 265 
+ N58A H1  IAML     031 23.14      3307.1 0.26                                   
+ PACW HN  IAML     031 15.91      7713.9 0.39                                   
+ PSBK HN  IAML     031 33.78      2841.7 0.18                                   
+ PSDB HN  IAML     031 35.64      8842.0 0.64                                   
+ PAPL HN  IAML     031 55.59       575.2 0.51                                   
+ PSSK HE  IAML     031 31.05      1013.2 0.26                                   
+ SSPA H1  IAML     031 11.69      5831.4 0.31                                   
+ PAKS HN  IAML     031 41.81      1570.4 0.22                                   
+ PSAL HN  IAML     031 21.22      3071.6 0.61                                   
+ BINY B2  IAML     032  1.04       965.1 0.38                                   
+ GEDE HN  IAML     031 44.62      1884.3 0.61                                   
+ PABE HN  IAML     031 18.34       508.4 0.38                                   
+ PALR HE  IAML     031 38.64       670.9 0.26                                   
+ PAMP HE  IAML     031 45.42      2128.6 0.35                                   
+ PSBV HN  IAML     031 57.12       658.6 0.24                                   
+ PAKC HE  IAML     031 31.11      1402.8 0.23                                   
+ PAMR HN  IAML     031 58.92       659.1 0.33                                   
+ PARS HN  IAML     032  5.93       612.3 0.21                                   
+ SDMD HN  IAML     031 34.51       464.4 0.13                                   
+ TUPA HE  IAML     031 51.47      2463.8 0.24                                   
+ UPAO HE  IAML     031 56.25      1772.4 0.47                                   
+ WUPA HN  IAML     031 43.85      1100.7 0.43                                   
+ PSUF HE  IAML     031 49.62      2186.8 0.38                                   
+ L56A H2  IAML     031 49.11      1302.9 0.42                                   
+ M57A H1  IAML     031 28.75      1810.8 0.39                                   
+ LUPA HN  IAML     031 46.85       554.3 0.37                                   
+ N58A H2  IAML     031 22.94      4142.6 0.18                                   
+ NPNY HN  IAML     032 13.79       192.6 0.34                                   
+ O54A H2  IAML     032  3.84       735.4 0.52                                   
+ PABK HN  IAML     031 24.34      1245.5 0.27                                   
+ PACH HN  IAML     031 52.97      1427.6 0.24                                   
+ PACH HE  IAML     031 53.05      1567.4 0.27                                   
+ PAHR HN  IAML     031 42.89      1700.2 0.55                                   
+ PALB HE  IAML     031 10.48     44487.6 0.25                                   
+ PAOC HN  IAML     031 58.29      1239.4 0.19                                   
+ PASH HN  IAML     031 27.10      2026.1 0.61                                   
+ PSAL HE  IAML     031 20.80      4641.6 0.36                                   
+ PSWB HE  IAML     031 41.14      3916.6 0.29                                   

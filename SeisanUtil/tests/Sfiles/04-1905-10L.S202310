@@ -1,0 +1,50 @@
+ 2023 1004 1905 12.4 LQ 40.810 -78.663 0.10F IST 13 .29 2.1LIST 0.0CIST        1
+ GAP= 87                   1.0     1.0 31.6                                    E
+ 2023-10-04-1905-01S.PE____234                                                 6
+ BINDERID: 419267                                                              3
+ VERSIONID: 2                                                                  3
+ CHANNELID: PSAL.HHZ.PE.--                                                     3
+ CHANNELID: PSAL.HHE.PE.--                                                     3
+ CHANNELID: ZEL1.HHZ.PE.00                                                     3
+ CHANNELID: PSDB.HHE.PE.--                                                     3
+ CHANNELID: POV4.HHZ.PE.00                                                     3
+ CHANNELID: POV4.HHE.PE.00                                                     3
+ CHANNELID: PABK.HHN.PE.--                                                     3
+ CHANNELID: POV1.HHE.PE.00                                                     3
+ CHANNELID: POV3.HHZ.PE.00                                                     3
+ CHANNELID: POV3.HHN.PE.00                                                     3
+ CHANNELID: POV2.HHZ.PE.00                                                     3
+ CHANNELID: POV2.HHE.PE.00                                                     3
+ CHANNELID: PAKS.HHE.PE.--                                                     3
+ CHANNELID: PACC.HHE.PE.--                                                     3
+ CHANNELID: PABE.HHZ.PE.--                                                     3
+ CHANNELID: PABE.HHN.PE.--                                                     3
+ CHANNELID: PAKC.HHN.PE.--                                                     3
+ CHANNELID: PACH.HHE.PE.--                                                     3
+ ACTION:HIN 23-10-05 07:29 OP:kah  STATUS:               ID:20231004190510     I
+ STAT SP IPHASW D HRMM SECON CODA AMPLIT PERI AZIMU VELO AIN AR TRES W  DIS CAZ7
+ ZEL1  2 EP   0   1905 17.36                              90   -0.1910 31.0 348 
+ PSDB  2 EP   0   1905 18.69                              90    0.2510 36.3 349 
+ PSAL  2 EP   0   1905 18.15                              90   -0.2910 36.3 144 
+ POV1  2 EP   0   1905 19.00                              90   -0.4210 42.1   9 
+ IUPA  2 EP   0   1905 20.87                              90    0.4110 48.4 243 
+ PABK  2 EP   0   1905 22.37                              90   -0.1510 60.7 173 
+ PACC  2 EP   0   1905 23.19                              90   -0.2610 66.3 330 
+ WRPS  2 EP   0   1905 23.82                              90    0.2610 67.0  91 
+ SSPA  2 EP   0   1905 23.51                              90   -0.2710 68.3 106 
+ PASH  2 EP   0   1905 28.19                              90    1.28 0 87.1 178 
+ PAKC  2 EP   0   1905 27.37                              90    0.3510 87.8  44 
+ PABE  2 EP   0   1905 27.44                              90    0.2510 88.8  73 
+ IUPA HN  IAML    1905 30.78       169.4 0.80                                   
+ PABE HN  IAML    1905 41.08       159.9 0.68                                   
+ PABK HE  IAML    1905 35.00        27.7 0.72                                   
+ PAKC HE  IAML    1905 43.34        38.4 1.29                                   
+ PACC HE  IAML    1905 38.17       119.2 0.71                                   
+ PAKS HN  IAML    1905 41.81        84.0 0.79                                   
+ PASH HN  IAML    1905 44.10        27.1 0.43                                   
+ POV1 HE  IAML    1905 28.42      1769.4 0.69                                   
+ PSAL HE  IAML    1905 24.16       270.8 0.95                                   
+ PSDB HE  IAML    1905 25.61       284.5 0.69                                   
+ SSPA H1  IAML    1905 35.04        61.4 1.52                                   
+ WRPS HN  IAML    1905 33.46       149.3 0.65                                   
+ ZEL1 HE  IAML    1905 24.89      4254.6 0.44                                   
