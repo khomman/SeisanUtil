@@ -198,6 +198,11 @@ class Event:
         :rtype: List
         """
         for arr in self.phase_arrivals:
+            # Phases not in the seisan config files may not have a 
+            # distance param but are still in the Sfile and just not used in 
+            # the location. Skip them
+            if not arr["dist"]:
+                continue
             ttime = (arr["arrtime"] - self.origin_time).total_seconds()
             self.ttimes.append([arr['sta'], arr['phase'], arr['dist'], ttime])
         return self.ttimes
