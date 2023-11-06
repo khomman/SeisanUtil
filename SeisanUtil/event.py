@@ -1,5 +1,6 @@
 from datetime import datetime
 import os
+import random
 
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
@@ -202,7 +203,7 @@ class Event:
         return self.ttimes
 
     def ttime_plot(self, phase_list=['P',"Pg","Pn","Pb",'S',"Sg","Sn","Sb"],
-                   outfile=None):
+                   sep_phase=True, outfile=None):
         """
         Create a travel time plot for this event.
         :param phase_list: List of all phase identifiers to use in generating
@@ -214,14 +215,31 @@ class Event:
         """
         if not self.ttimes:
             self.calc_ttimes()
-        dists = [i[2] for i in self.ttimes if i[1] in phase_list]
-        times = [i[3] for i in self.ttimes if i[1] in phase_list]
+        times = {}
+        for t in self.ttimes:
+            if t[1] in phase_list:
+                if t[1] in times:
+                    times[t[1]] = np.vstack([times[t[1]], 
+                                             np.array([t[2], t[3]])])
+                else:
+                    times[t[1]] = np.array([t[2], t[3]])
+        
         fig, ax = plt.subplots()
-        ax.scatter(dists, times, c="red", alpha=0.75, edgecolors="black",
-                   linewidth=0.1)
+        phases = times.keys()
+        cmap = plt.get_cmap('viridis')
+        colors = random.sample(cmap.colors, len(phases))
+        for i,kv in enumerate(times.items()):
+            if sep_phase:
+                ax.scatter(kv[1][:,0], kv[1][:,1],
+                color=cmap.colors[cmap.N//len(phases)*i], alpha=0.75, 
+                edgecolors="black", linewidth=0.1, label=kv[0])
+            else:
+                ax.scatter(kv[1][:,0], kv[1][:,1], color="red", alpha=0.75,
+                edgecolors='black', linewidths=0.1, label=kv[0])
         ax.set_xlabel("Dist. (km)")
         ax.set_ylabel("Time (s)")
         ax.set_title(f"Mag. {self.mag} Event on {self.origin_time}")
+        ax.legend()
         if outfile:
             plt.savefig(outfile)
         else:
@@ -308,10 +326,4 @@ class Event:
 
     def __repr__(self):
         return f"{self.origin_time} event"
-    
-
-
-if __name__ == "__main__":
-    pass
-
     

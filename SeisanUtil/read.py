@@ -19,6 +19,9 @@ def read_sfile(path: str, format: int =1, read_arrivals: bool =True) -> Event:
     event = Event()
     with open(path, 'r') as f:
         for line in f.readlines():
+            # Skip any blank lines
+            if not line.strip():
+                continue
             if line[-3:] == "EC3":
                 type_line = "EC3"
             elif line[-6:] == "MACRO3":
@@ -109,7 +112,6 @@ def _parse_type_1(line: str) -> dict:
         ev_info["fixed_depth"] = True
     else:
         ev_info["fixed_depth"] = False
-    
     return ev_info
 
 def _parse_type_2(line: str) -> dict:
@@ -239,27 +241,3 @@ def _parse_type_macro(line: str) -> dict:
         observation
     """
     return {"macro_file": line.split()[0]}
-
-if __name__ == "__main__":
-    import os
-    cwd = os.getcwd()
-    ev = read_sfile(f"{cwd}/tests/Sfiles/13-0031-00L.S201906")
-    #ev = read_sfile(f"{cwd}/tests/Sfiles/01-1544-40L.S201908")
-    #ev = read_sfile(f"{cwd}/tests/Sfiles/04-1905-10L.S202310")
-    print(ev.origin_time)
-    ev.ttime_plot(outfile="tst.png", phase_list=['P'])
-
-    sta_coords = {}
-    with open('tests/Sfiles/staCoords.txt', 'r') as f:
-        for line in f.readlines():
-            sta, lat, lon = line.split()
-            sta_coords[sta] = [lat,lon]
-    ev.add_station_coords(sta_coords)
-    #ev.ttime_map([-81.0, -74.5, 39.5, 42.0], max_duration=30,outfile='tstMap.png')
-    #ev.ttime_map(outfile='tstMap.png')
-    
-    print(ev.mag)
-    ev.calc_mag()
-    print(ev.mag)
-    ev.calc_mag(netmag_type='mean')
-    print(ev.mag)

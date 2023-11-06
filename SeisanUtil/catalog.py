@@ -1,4 +1,5 @@
 from datetime import datetime
+import random
 from typing import List
 
 import matplotlib.pyplot as plt
@@ -40,26 +41,37 @@ class Catalog:
         pass
             
     def ttime_plot(self, phase_list=['P',"Pg","Pn","Pb",'S',"Sg","Sn","Sb"],
-                   best_fit=False, outfile=None):
+                   sep_phase=True, best_fit=False, outfile=None):
         """
         Generate a travel time plot for the entire catalog.
         :param phase_list: list of phases to gather from Event.ttimes
         :type phase_list: List[str]
         """
-        times = []
+        times = {}
         for ev in self.catalog:
             if not ev.ttimes:
                 ev.calc_ttimes()
             for t in ev.ttimes:
                 if t[1] in phase_list:
-                    times += [[t[2], t[3]]]
-        times = np.array(times)
+                    if t[1] in times:
+                        times[t[1]] = np.vstack([times[t[1]], 
+                                                 np.array([t[2], t[3]])])
+                    else:
+                        times[t[1]] = np.array([t[2], t[3]])
         fig, ax = plt.subplots()
-        ax.scatter(times[:,0], times[:,1], c="red", alpha=0.75, 
-                   edgecolors="black", linewidth=0.1)
+        phases = times.keys()
+        cmap = plt.get_cmap('viridis')
+        for i,kv in enumerate(times.items()):
+            if sep_phase:
+                ax.scatter(kv[1][:,0], kv[1][:,1], 
+                    color=cmap.colors[cmap.N//len(phases)*i], alpha=0.75,
+                    edgecolors="black", linewidths=0.1, label=kv[0])
+            else:
+                ax.scatter(kv[1][:,0], kv[1][:,1], color="red", alpha=0.75, 
+                   edgecolors="black", linewidth=0.1, label=kv[0])
         ax.set_xlabel("Dist. (km)")
         ax.set_ylabel("Time (s)")
-        #ax.set_title(f"Mag. {self.mag} Event on {self.origin_time}")
+        ax.legend()
         if outfile:
             plt.savefig(outfile)
         else:
@@ -97,13 +109,3 @@ class Catalog:
     def __repr__(self):
         return f"Catalog of {len(self.catalog)} events"
 
-
-if __name__ == "__main__":
-    evs = ["tests/Sfiles/01-1300-32L.S202204",
-           "tests/Sfiles/01-1544-40L.S201908",
-           "tests/Sfiles/04-1905-10L.S202310",
-           "tests/Sfiles/13-0031-00L.S201906"]
-    cat = Catalog(evs)
-    #cat.ttime_plot(outfile="TTPlot.png")
-    ev = read_sfile("tests/Sfiles/01-1300-32L.S202204")
-    print(ev.__dir__())
