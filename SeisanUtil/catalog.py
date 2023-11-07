@@ -1,8 +1,12 @@
 from datetime import datetime
 import random
-from typing import List
+from typing import List, Union
 
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
 import matplotlib.pyplot as plt
+import matplotlib.colors as colors
+from matplotlib import cm
 import numpy as np
 
 from SeisanUtil.event import Event
@@ -17,12 +21,12 @@ class Catalog:
         sfile paths and/or Event instances.
     :type events: List[Events/str]
     """
-    def __init__(self, events=None):
+    def __init__(self, events: List[Union[Event, str]]=None):
         self.catalog = []
         if events:
             self.add_events(events)
 
-    def add_events(self, events: List[Event]):
+    def add_events(self, events: List[Union[Event, str]]):
         """
         Appends events to the catalog instance. Accepts a list consiting 
         of sfile paths and/or Event instances
@@ -38,14 +42,40 @@ class Catalog:
 
     def describe(self):
         """Output basic statistics about the catalog"""
-        pass
+        mags, lat_err, lon_err, z_err, time, gap = [], [], [], [], [], []
+        n, rms = [], []
+        for ev in self.catalog:
+            mags.append(ev.mag)
+            lat_err.append(ev.lat_err)
+            lon_err.append(ev.lon_err)
+            z_err.append(ev.z_err)
+            gap.append(ev.gap)
+            rms.append(ev.rms)
+            n.append(ev.n)
+
+        print(f"{len(mags)} Total events in the catalog.")
+        print("Mean values in catalog:")
+        print(f"{'Magnitude': <20} {round(np.mean(np.array(mags)),1)}")
+        print(f"{'Lat Error': <20} {round(np.mean(np.array(lat_err)),2)}")
+        print(f"{'Lon Error': <20} {round(np.mean(np.array(lon_err)),2)}")
+        print(f"{'Depth Error': <20} {round(np.mean(np.array(z_err)),2)}")
+        print(f"{'Az. Gap': <20} {round(np.mean(np.array(gap)),2)}")
+        print(f"{'RMS': <20} {round(np.mean(np.array(rms)),2)}")
+        print(f"{'Num Stations': <20} {round(np.mean(np.array(n)),0)}")
             
-    def ttime_plot(self, phase_list=['P',"Pg","Pn","Pb",'S',"Sg","Sn","Sb"],
-                   sep_phase=True, best_fit=False, outfile=None):
+    def ttime_plot(self, sep_phase: bool =True, best_fit: bool =False, 
+                   phase_list: List =['P',"Pg","Pn","Pb",'S',"Sg","Sn","Sb"],
+                   outfile: str =None):
         """
         Generate a travel time plot for the entire catalog.
         :param phase_list: list of phases to gather from Event.ttimes
         :type phase_list: List[str]
+        :param sep_phase: Plot different phases in different colors
+        :type sep_phase: bool
+        :param best_fit: Not implemented yet
+        :type best_fit: bool
+        :param outfile: Filename to save figure
+        :type outfile: str
         """
         times = {}
         for ev in self.catalog:
@@ -77,7 +107,8 @@ class Catalog:
         else:
             plt.show()
 
-    def filter(self, min_date, max_date):
+    def filter(self, min_date: Union[datetime,str], 
+               max_date: Union[datetime,str]):
         """ 
         Return new catalog of events within a date range
         :param min_date: Minimum date used for filtering. Either a
@@ -98,7 +129,59 @@ class Catalog:
                ev.origin_time.date() >= min_date.date():
                 evs.append(ev)
         return Catalog(evs)
-            
+
+    def map(self, extent: List[float] =None, buffer: float =0, 
+            projection: ccrs.Projection =ccrs.Mercator(), outfile: str =None):
+        """ 
+        Create a map of event locations. Color events by their ev_id types
+        :param extent: map boundaries. [min_lon, max_lon, min_lat, max_lat]. If
+            no extent provided, get the extent from the station coordinates.
+        :type extent: List
+        :param buffer: Distance in degrees to add to the plot borders. Useful 
+            when extent is None.
+        :type buffer: float
+        :param projection: Cartopy projection to use.
+        :type projection: cartopy.crs.Projection
+        :param outfile: Filename to save image. If None, show the image instead.
+        :type outfile: str
+        """
+
+        # Get coords of all events
+        lats, lons, ev_type, mag = [], [],[], []
+        for ev in self.catalog:
+            lats.append(ev.latitude)
+            lons.append(ev.longitude)
+            mag.append(5**ev.mag)        
+        # Set coordinates for map extent if extent not explicitly set
+        # and add a quarter degree buffer
+        if not extent:
+            min_lon = min(lons) - buffer
+            max_lon = max(lons) + buffer
+            min_lat = min(lats) - buffer
+            max_lat = max(lats) + buffer
+            extent = [min_lon, max_lon, min_lat, max_lat]
+        
+        fig = plt.figure()
+        #ax = fig.add_axes([0, 0, 1, 1], projection=projection)
+        ax = plt.axes(projection=projection)
+        ax.set_extent(extent, ccrs.Geodetic())
+        ax.add_feature(cfeature.STATES.with_scale('10m'), linewidth=0.75,
+                      edgecolor='k', facecolor='whitesmoke')
+        ax.add_feature(cfeature.LAKES)
+        ax.add_feature(cfeature.OCEAN)
+        ax.patch.set_visible = False
+
+        cmap = cm.get_cmap('viridis')
+        #for i,v in enumerate(lats):
+        ax.scatter(lons, lats, marker="o", c='red',
+            s=mag,
+            linestyle='-', edgecolor='k', alpha=0.75, zorder=10,
+            transform=ccrs.Geodetic())
+
+        if outfile:
+            plt.savefig(outfile)
+        else:
+            plt.show() 
 
     def __len__(self):
         return len(self.catalog)
@@ -109,3 +192,7 @@ class Catalog:
     def __repr__(self):
         return f"Catalog of {len(self.catalog)} events"
 
+if __name__ == "__main__":
+    cat = Catalog(["tests/Sfiles/01-1300-32L.S202204", "tests/Sfiles/01-1544-40L.S201908",
+                  "tests/Sfiles/25-1500-14L.S201610", "tests/Sfiles/13-0031-00L.S201906"])
+    cat.describe()
