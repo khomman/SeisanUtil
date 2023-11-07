@@ -1,3 +1,5 @@
+import os
+
 from SeisanUtil.catalog import Catalog
 from SeisanUtil.event import Event
 from SeisanUtil.read import read_sfile
@@ -23,3 +25,11 @@ def test_filter_events():
     print(cat)
     filtered_cat = cat.filter("2022-03-30", "2022-05-20")
     assert len(filtered_cat) == 1
+
+def test_map():
+    cat = Catalog(["Sfiles/13-0031-00L.S201906",
+                   "Sfiles/02-2325-20L.S202309"])
+    cat.map(outfile="Sfiles/tst.png")
+    assert os.path.exists("Sfiles/tst.png")
+    if os.path.exists("Sfiles/tst.png"):
+        os.remove("Sfiles/tst.png")
