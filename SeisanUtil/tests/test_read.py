@@ -2,7 +2,7 @@ from SeisanUtil.event import Event
 import SeisanUtil.read as sur
 
 def test_read_event():
-    ev1 = sur.read_sfile("Sfiles/01-1544-40L.S201908")
+    ev1 = sur.read_sfile("Sfiles/25-0337-32L.S199606")
     ev2 = sur.read_sfile("Sfiles/13-0031-00L.S201906")
 
     assert type(ev1) == Event
@@ -48,7 +48,37 @@ def test_parse_type_phase_nordic():
     assert info["az"] == 343.0
 
 def test_parse_type_phase_nordic2():
-    pass
+    nordic2 = " SKAR HHZ NS00 IP         0515 02.820      C       TES pv  77.0 0.2710  392 149  "
+    info = sur._parse_type_phase_nordic2(nordic2)
+    assert info["sta"] == "SKAR"
+    assert info["cmp"] == "HHZ"
+    assert info["net"] == "NS"
+    assert info["loc"] == "00"
+    assert info["qual"] == "I"
+    assert info["phase"] == "P"
+    assert info["arr_h"] == 5
+    assert info["arr_m"] == 15
+    assert info["arr_s"] == 2.820
+    assert info["pol"] == "C"
+    assert info["ain"] == 77.0
+    assert info["dist"] == 392.0
+    assert info["az"] == 149
+    assert info["tres"] == 0.27
+
+def test_parse_type_phase_nordic2_amp():
+    nordic2 = " HYA  HHZ NS00  IAML      0515 46.950  344.9  0.40 TES pv      -0.07    299 163 "
+    info = sur._parse_type_phase_nordic2(nordic2)
+    assert info["qual"] == ""
+    assert info["phase"] == "IAML"
+    assert info["amp"] == 344.9
+    assert info["per"] == 0.4
+
+def test_parse_type_phase_nordic2_baz():
+    nordic2 = " HYA  HHZ NS00  BAZ       0514 53.460  328.5  10.9 TES pv       -16.    299 163 "
+    info = sur._parse_type_phase_nordic2(nordic2)
+    assert info["phase"] == "BAZ"
+    assert info["baz"] == 328.5
+    assert info["app_vel"] == 10.9
 
 def test_parse_type_6():
     type_6 = " 1996-06-03-2002-18S.TEST__012                                                 6"

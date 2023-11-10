@@ -126,16 +126,16 @@ def _parse_type_3(line:str) -> dict:
 
 def _parse_type_phase_nordic2(line:str, date:str=None) -> dict:
     """ Parse a nordic phase line. Acceptable for nordic2 format"""
-    arr = {"sta": line[1:6], "cmp": line[6:9], "Net": line[10:12],
+    arr = {"sta": line[1:6], "cmp": line[6:9], "net": line[10:12],
            "loc":line[12:14], "qual": line[15],
            "phase": line[16:24], "wgtind": line[24],
            "arr_h": line[26:28], "arr_m": line[28:30],
-           "arr_s": line[31:37], "param1": line[37:44],
-           "param2": line[44:50], "agency": line[51:54], "op": line[55:58],
+           "param1": line[37:44], "param2": line[44:50],
+           "arr_s": line[31:37], "agency": line[51:54], "op": line[55:58],
            "ain": line[59:63], "tres": line[63:68], "dist": line[70:75],
            "az": line[76:79]}
     int_keys = ["arr_h", "arr_m"]
-    float_keys = ["per", "amp", "arr_s", "ain", "dist", "trex", "az"]
+    float_keys = ["arr_s", "ain", "dist", "tres", "az"]
     # deal with empty results
     for k,v in arr.items():
         arr[k] = v.strip()
@@ -147,10 +147,29 @@ def _parse_type_phase_nordic2(line:str, date:str=None) -> dict:
             arr[key] = float(arr[key])
     time = f"{arr['arr_h']:02}:{arr['arr_m']:02}:{arr['arr_s']:02}"
     if date:
-        arr['arrtime'] = datetime.strptime(f"{date} {time}",
+        arr["arrtime"] = datetime.strptime(f"{date} {time}",
                                             "%Y-%m-%d %H:%M:%S.%f")
     else:
-        arr['arrtime'] = datetime.strptime(time, "%H:%M:%S.%f")
+        arr["arrtime"] = datetime.strptime(time, "%H:%M:%S.%f")
+    # Associate param1 and param2 with actual values
+    param1 = arr["param1"]
+    param2 = arr["param2"]
+    amp_phases = ["IAML", "IAMs_20", "IVmB_BB", "IVMs_BB", "IAmb"]
+    if arr["phase"] in amp_phases:
+        # Phase is an amplitude so set period and amplitude in arrival dict
+        arr["amp"] = float(param1)
+        arr["per"] = float(param2)
+    elif arr["phase"] == "END":
+        # coda marker, param2 is blank
+        arr["duration"] = float(param1)
+    elif arr["phase"] == "BAZ":
+        # phase deals with back azimuth, set back az and apparent velocity
+        arr["baz"] = float(param1)
+        arr["app_vel"] = float(param2)
+    else:
+        # Whatever else should be a travel time arrival, param2 should be blank
+        arr["pol"] = param1
+    
     return arr
 
 def _parse_type_phase_nordic(line: str, date:str =None) -> dict:

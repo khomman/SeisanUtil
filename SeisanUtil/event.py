@@ -73,7 +73,7 @@ class Event:
         else:
             self.sta_coords = []
 
-    def update_from_dict(self, d):
+    def update_from_dict(self, d: dict):
         """
         Update the event instance from a dictionary. Sets all dict keys to 
         method attributes.
@@ -84,7 +84,7 @@ class Event:
         for k,v in d.items():
             setattr(self, k, v)
     
-    def add_arrivals_from_dict(self, d):
+    def add_arrivals_from_dict(self, d: dict):
         """
         Add dictionary to an arrival information list for the event instance. 
         If key "amp" exists in dictionary and evaluates to True then the dict
@@ -99,7 +99,7 @@ class Event:
         else:
             self.phase_arrivals.append(d)
 
-    def add_station_coords(self, sta_coords, arrivals_only=True):
+    def add_station_coords(self, sta_coords: dict, arrivals_only: bool = True):
         """ Add dict of station coordinates as an attribute to the instance.
         Ex:
             sta_coords = {sta1: [lat1, lon1], sta2: [lat2, lon2]}
@@ -125,8 +125,9 @@ class Event:
             self.sta_coords = sta_coords
         
     
-    def _kim(self, sta_coords=None, cmp_combine='max', netmag_type='mean',
-             min_dist=100, max_dist=800):
+    def _kim(self, sta_coords: dict =None, cmp_combine: str ='max',
+             netmag_type: str ='mean', min_dist: int =100,
+             max_dist: int =800):
         """ 
         Magnitude function for eastern U.S from Kim (1998; "ML in Eastern
         North America").
@@ -174,7 +175,7 @@ class Event:
         return net_mag
 
 
-    def calc_mag(self, func=_kim, **kwargs):
+    def calc_mag(self, func: function =_kim, **kwargs):
         """ 
         By default, we read mag from the seisan Sfile.  This function will
         update self.mag by calculating the magnitude using a defined function. 
@@ -207,8 +208,8 @@ class Event:
             self.ttimes.append([arr['sta'], arr['phase'], arr['dist'], ttime])
         return self.ttimes
 
-    def ttime_plot(self, phase_list=['P',"Pg","Pn","Pb",'S',"Sg","Sn","Sb"],
-                   sep_phase=True, outfile=None):
+    def ttime_plot(self, sep_phase: bool =True, outfile: str =None,
+                   phase_list: list =['P',"Pg","Pn","Pb",'S',"Sg","Sn","Sb"]):
         """
         Create a travel time plot for this event.
         :param phase_list: List of all phase identifiers to use in generating
@@ -250,9 +251,10 @@ class Event:
         else:
             plt.show()
     
-    def ttime_map(self, extent=None, buffer=0, sta_coords=None, 
-                  phase_list=['P'], projection=ccrs.Mercator(), 
-                  max_duration=None, outfile=None):
+    def ttime_map(self, extent: list =None, buffer: float =0, 
+                  sta_coords: dict =None, phase_list: list =['P'], 
+                  projection: ccrs.Projection =ccrs.Mercator(), 
+                  max_duration: int =None, outfile: str =None):
         """ 
         Create a map of event location, station location. Color stations
         by arrival time of phase in phase_list. Station locations need to 

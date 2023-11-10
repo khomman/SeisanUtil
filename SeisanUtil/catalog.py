@@ -26,12 +26,13 @@ class Catalog:
         if events:
             self.add_events(events)
 
-    def add_events(self, events: List[Union[Event, str]]):
+    def add_events(self, events: List[Union[Event, str]], **kwargs):
         """
         Appends events to the catalog instance. Accepts a list consiting 
         of sfile paths and/or Event instances
         :param events: List of sfile paths and/or Event instances
-        :type events: List[Events/str]    
+        :type events: List[Events/str]
+        :param **kwargs: Pass additional kwargs to read_sfile
         """
         for ev in events:
             if isinstance(ev, Event):
@@ -191,8 +192,3 @@ class Catalog:
 
     def __repr__(self):
         return f"Catalog of {len(self.catalog)} events"
-
-if __name__ == "__main__":
-    cat = Catalog(["tests/Sfiles/01-1300-32L.S202204", "tests/Sfiles/01-1544-40L.S201908",
-                  "tests/Sfiles/25-1500-14L.S201610", "tests/Sfiles/13-0031-00L.S201906"])
-    cat.describe()

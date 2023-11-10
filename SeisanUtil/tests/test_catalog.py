@@ -33,3 +33,11 @@ def test_map():
     assert os.path.exists("Sfiles/tst.png")
     if os.path.exists("Sfiles/tst.png"):
         os.remove("Sfiles/tst.png")
+
+def test_ttime_plot():
+    cat = Catalog(["Sfiles/13-0031-00L.S201906",
+                   "Sfiles/02-2325-20L.S202309"])
+    cat.ttime_plot(outfile="Sfiles/tst.png")
+    assert os.path.exists("Sfiles/tst.png")
+    if os.path.exists("Sfiles/tst.png"):
+        os.remove("Sfiles/tst.png")
