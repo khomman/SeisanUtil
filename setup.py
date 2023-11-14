@@ -9,4 +9,9 @@ setup(
         'numpy',
         'click'
     ],
+    entry_points={
+        'console_scripts': [
+            'seisanutil=SeisanUtil.scripts.seisanutil:run'
+        ] 
+    }
 )

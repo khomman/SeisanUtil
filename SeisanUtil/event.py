@@ -9,7 +9,7 @@ import matplotlib.colors as colors
 from matplotlib import cm
 import numpy as np
 
-from SeisanUtil.util import least_squares, calc_dist
+from SeisanUtil.util import least_squares_bf, calc_dist
 
 class Event:
     """ 
@@ -175,7 +175,7 @@ class Event:
         return net_mag
 
 
-    def calc_mag(self, func: function =_kim, **kwargs):
+    def calc_mag(self, func=_kim, **kwargs):
         """ 
         By default, we read mag from the seisan Sfile.  This function will
         update self.mag by calculating the magnitude using a defined function. 
