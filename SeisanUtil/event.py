@@ -158,11 +158,8 @@ class Event:
         sta_mags = {}
         for amp in self.amplitudes:
             sta = amp["sta"]
-            print(self.longitude, self.latitude)
-            print(sta, self.sta_coords[sta][1], self.sta_coords[sta][0])
             sta_dist = calc_dist([self.sta_coords[sta][0], self.sta_coords[sta][1]],
                                  [self.latitude, self.longitude])
-            print(sta, sta_dist)
             mag = np.log10(amp["amp"]/1000.0)+(1.55*np.log10(sta_dist))-0.22
             if sta in sta_mags:
                 sta_mags[sta].append(mag)
@@ -191,7 +188,7 @@ class Event:
             self.mag = func(self, **kwargs)
         else:
             self.mag = func(**kwargs)
-
+        return self.mag
     def calc_ttimes(self):
         """ 
         Calculate travel times for all phase arrivals in this instance
