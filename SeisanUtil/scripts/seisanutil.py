@@ -7,15 +7,11 @@ from SeisanUtil.util import read_station_coords
 
 
 @click.group(no_args_is_help=True)
-#@click.option("-s", "--sfile", help="What Sfile to read the data from. If "
-#              "-s not provided, try to read `eev.cur.sfile` from Seisan WOR "
-#              "directory.")
-#@click.option("-f", "--format", help="What nordic format is the Sfile. Valid "
-#              "options are 1 or 2.", default=1)
 @click.argument("sfile")
-#@click.argument("format")
+@click.option("-f", "--format", help="What nordic format is the Sfile. Valid "
+              "options are 1 or 2.", default=1)                               
 @click.pass_context
-def main(ctx, sfile: str=None):
+def main(ctx, sfile: str=None, format: int=1):
     """
     CLI addition to SeisanUtil to allow quick analysis of single Sfiles.  If no
     sfile provided, searches the current directory for a file called 
@@ -28,8 +24,7 @@ def main(ctx, sfile: str=None):
         with open("eev.cur.sfile", 'r') as f:
             sfile = f.read().strip()
     
-    #ev = read_sfile(sfile, format=format)
-    ev = read_sfile(sfile)
+    ev = read_sfile(sfile, format=format)
     ctx.obj = {"ev": ev}
     
 
@@ -46,7 +41,6 @@ def ttplot(ctx, sep_phase, filename):
     if not ev:
         raise RuntimeError("No Sfile provided. Please add an Sfile or run "
                            "program from the WOR directory.")
-    #ev = read_sfile(sfile)
     ev.ttime_plot(sep_phase=sep_phase, outfile=filename)
     
 
@@ -68,7 +62,6 @@ def ttmap(ctx, extent, buffer, filename, sta_coords, max_duration):
     if not ev:
         raise RuntimeError("No Sfile provided. Please add an Sfile or run the "
                            "program from the WOR directory.")
-    #ev = read_sfile(sfile)
     coords = read_station_coords(sta_coords)
     # build kwarg dict to expand in call to ttime_map to preserve ev.ttime_map
     # defaults
@@ -91,11 +84,13 @@ def ttmap(ctx, extent, buffer, filename, sta_coords, max_duration):
               "`SeisanUtil.Event.calc_mag`. "
               "Ex. seisanutil calc_mag min_dist=0 max_dist=800"
               " Parameters must be set with the an equal sign separating the "
-              "keyword argument and the value.  If the keyword 'f' is used,"
-              "calc_mag will import a single function(called 'mag') from the file."
-              "Ex. seisanutil calc_mag f=localmag.py will import a function"
-              "called mag from the localmag.py file.  Remaining arguments"
-              "will be passed to this function\n")
+              "keyword argument and the value.  If the keyword 'f' is used, "
+              "calc_mag will import a single function(called 'mag') from the file. "
+              "Ex. seisanutil calc_mag f=localmag.py will import a function "
+              "called mag from the localmag.py file.  Remaining arguments "
+              "will be passed to this function\n.  By default, station coords " 
+              "must also be provided via the sta_coords=staCoordFile.txt "
+              "However, if using a custom function this may not be needed." )
 @click.argument("mag_params", nargs=-1, type=click.UNPROCESSED)
 @click.pass_context
 def calc_mag(ctx, mag_params):
@@ -122,7 +117,7 @@ def calc_mag(ctx, mag_params):
         ev.calc_mag(func=mod.mag, **kw)
     else:
         ev.calc_mag(**kw)
-    print(ev.mag)
+    print(f"Magnitude: {ev.mag}")
 
 def run():
     main(obj={})
