@@ -9,7 +9,7 @@ import matplotlib.colors as colors
 from matplotlib import cm
 import numpy as np
 
-from SeisanUtil.util import least_squares_bf, calc_dist
+from SeisanUtil.util import least_squares_bf, calc_dist_geo
 
 class Event:
     """ 
