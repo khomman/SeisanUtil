@@ -184,6 +184,45 @@ class Catalog:
         else:
             plt.show() 
 
+    def lollipop(self, outfile=None):
+        """ 
+        Create lollipop plot of the events with time on the x-axis
+        and magnitude on the y-axis.
+        :param outfile: Filename to save image to, if None, show the image
+        :type outfile: None
+        :returns: None
+        :rtype: None
+        """
+        mags, otimes = [], []
+        for ev in self.catalog:
+            mags.append(ev.mag)
+            otimes.append(ev.origin_time)
+        sorted_times = [(i,j) for i,j in sorted(zip(otimes,mags))]
+        sorted_times = np.array(sorted_times)
+        fig, ax = plt.subplots()
+        markerlines, stemlines, baseline = ax.stem(sorted_times[:,0],
+                                                   sorted_times[:,1],
+                                                   linefmt="k-",
+                                                   markerfmt="ro")
+        markerlines.set_markeredgecolor('dimgrey')
+        markerlines.set_markeredgewidth(0.5)
+        markerlines.set(alpha=0.75)
+        stemlines.set_color('dimgrey')
+        baseline.set_color('black')
+        #ax.tick_params(axis='x', labelrotation=45)
+        ax.set_xlabel("Date")
+        ax.set_ylabel("Magnitude")
+        fig.autofmt_xdate()
+        fig.tight_layout()
+
+        if outfile:
+            plt.savefig(outfile)
+        else:
+            plt.show()
+
+    def mag_complete(self,):
+        pass
+
     def __len__(self):
         return len(self.catalog)
 

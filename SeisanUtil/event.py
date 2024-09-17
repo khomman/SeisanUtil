@@ -130,7 +130,7 @@ class Event:
              max_dist: int =800):
         """ 
         Magnitude function for eastern U.S from Kim (1998; "ML in Eastern
-        North America").
+        North America"). Assumes that the amplitudes are stored in mm.
         :param sta_coords: Dictionary of station coordinates. See
             Event.add_station_coords.
         :type sta_coords: dict
@@ -154,13 +154,13 @@ class Event:
             if sta_coords:
                 self.add_station_coords(sta_coords)
             else:
-                raise ValueError("Event does not contain sta_coords.")
+                raise ValueError("Event does not contain station coordinates.")
         sta_mags = {}
         for amp in self.amplitudes:
             sta = amp["sta"]
-            sta_dist = calc_dist([self.sta_coords[sta][0], self.sta_coords[sta][1]],
-                                 [self.latitude, self.longitude])
-            mag = np.log10(amp["amp"]/1000.0)+(1.55*np.log10(sta_dist))-0.22
+            sta_dist = calc_dist_geo([self.sta_coords[sta][0], self.sta_coords[sta][1]],
+                                 [self.latitude, self.longitude])[0]/1000.0
+            mag = np.log10(amp["amp"])+(1.55*np.log10(sta_dist))-0.22
             if sta in sta_mags:
                 sta_mags[sta].append(mag)
             else:
