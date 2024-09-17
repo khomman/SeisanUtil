@@ -41,3 +41,12 @@ def test_ttime_plot():
     assert os.path.exists("Sfiles/tst.png")
     if os.path.exists("Sfiles/tst.png"):
         os.remove("Sfiles/tst.png")
+
+def test_lollipop():
+    events = ["Sfiles/01-1300-32L.S202204", "Sfiles/01-1544-40L.S201908",
+              "Sfiles/04-1905-10L.S202310", "Sfiles/13-0031-00L.S201906"] 
+    cat = Catalog(events)
+    cat.lollipop(outfile="Sfiles/tst.png")
+    assert os.path.exists("Sfiles/tst.png")
+    #if os.path.exists("Sfiles/tst.png"):
+    #    os.remove("Sfiles/tst.png")
