@@ -108,8 +108,58 @@ class Catalog:
         else:
             plt.show()
 
-    def filter(self, min_date: Union[datetime,str], 
-               max_date: Union[datetime,str]):
+    def _filter_date(self, ev: Event, min_date: Union[datetime,str],
+                     max_date: Union[datetime, str]):
+        """
+        Check if an event origin time satisfies the criteria from
+        min and max date. Return True if so and False otherwise
+        """
+        if min_date and ~isinstance(min_date, datetime):
+            min_date = datetime.strptime(min_date, "%Y-%m-%d")
+        if max_date and ~isinstance(max_date, datetime):
+            max_date = datetime.strptime(max_date, "%Y-%m-%d")
+        
+        if min_date and max_date:
+            if ev.origin_time.date() <= max_date.date() and \
+                ev.origin_time.date() >= min_date.date():
+                return True
+        if min_date and not max_date:
+            if ev.origin_time.date() >= min_date.date():
+                return True
+        if max_date and not min_date:
+            if ev.origin_time.date() <= max_date.date():
+                return True
+        return False
+
+    def _filter_coord(self, ev: Event, min_lat: float, max_lat: float,
+                      min_lon: float, max_lon: float):
+        """ 
+        Check if event coordinates are between min and max latitude
+        return True if event is within the region, false otherwise
+        """
+        if min_lat and not max_lat or max_lat and not min_lat:
+            raise ValueError("Provide both min_lat and max_lat")
+
+        if min_lon and not max_lon or max_lon and not min_lon:
+            raise ValueError("Provide both min_lon and max_lon")
+
+        if min_lat and min_lon:
+            if ev.latitude >= min_lat and ev.latitude <= max_lat \
+                and ev.longitude >= min_lon and ev.longitude <= max_lon:
+                return True
+        if min_lat and not min_lon:
+            if ev.latitude >= min_lat and ev.latitude <= max_lat:
+                return True
+        if min_lon and not min_lat:
+            if ev.longitude >= min_lon and ev.longitude <= max_lon:
+                return True
+
+        return False
+
+    def filter(self, min_date: Union[datetime,str]=None, 
+               max_date: Union[datetime,str] =None, min_lat: float =None,
+               max_lat: float =None, min_lon: float =None,
+               max_lon: float =None):
         """ 
         Return new catalog of events within a date range
         :param min_date: Minimum date used for filtering. Either a
@@ -120,14 +170,16 @@ class Catalog:
         :type max_date: datetime | str
         :return Event
         """
-        if ~isinstance(min_date, datetime):
-            min_date = datetime.strptime(min_date, "%Y-%m-%d")
-        if ~isinstance(max_date, datetime):
-            max_date = datetime.strptime(max_date, "%Y-%m-%d")
+        filt_time = True # if these are true we want to add event
+        filt_coord = True # to the filtered catalog
         evs = []
         for ev in self.catalog:
-            if ev.origin_time.date() <= max_date.date() and \
-               ev.origin_time.date() >= min_date.date():
+            if any((min_date, max_date)):
+               filt_time = self._filter_date(ev, min_date, max_date) 
+            if any((min_lat, max_lat, min_lon, max_lon)):
+                filt_coord = self._filter_coord(ev, min_lat, max_lat,
+                                           min_lon, max_lon)
+            if filt_time and filt_coord:
                 evs.append(ev)
         return Catalog(evs)
 
